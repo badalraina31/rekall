@@ -1263,8 +1263,9 @@ class _FILE_OBJECT(ObjectMixin, obj.Struct):
             if device_name:
                 name = u"\\Device\\{0}".format(device_name)
 
-        if self.FileName:
-            name += utils.SmartUnicode(self.FileName)
+        filename = self.get_filename()
+        if filename:
+            name += utils.SmartUnicode(filename)
 
         return name
 
