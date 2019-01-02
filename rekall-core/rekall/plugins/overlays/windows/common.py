@@ -1291,12 +1291,20 @@ class _FILE_OBJECT(ObjectMixin, obj.Struct):
                 if name in drive_letter_device_map:
                     name = drive_letter_device_map.get(name)
 
-        filename = self.FileName.v(vm=vm)
+        filename = self.get_filename(vm=vm)
         if filename:
             name += utils.SmartUnicode(filename)
 
         return name
 
+
+    def get_filename(self, vm=None):
+        filename = self.FileName.v(vm=vm)
+ 
+        if (not filename or filename == "\x00") and self.FileName.Length > 0:
+            filename = "<Filename has probably been paged out>"
+ 
+        return filename
 
 
 class _OBJECT_DIRECTORY(ObjectMixin, obj.Struct):
