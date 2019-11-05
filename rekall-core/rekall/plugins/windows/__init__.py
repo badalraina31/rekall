@@ -39,3 +39,7 @@ from rekall.plugins.windows import shimcache
 from rekall.plugins.windows import ssdt
 from rekall.plugins.windows import taskmods
 from rekall.plugins.windows import vadinfo
+from rekall.plugins.windows import list_plugins
+
+if sys.version_info[0] >= 3 and sys.version_info[1] > 4:
+    from rekall.plugins.windows import pypykatz
